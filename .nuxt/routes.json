@@ -1,0 +1,110 @@
+[
+  {
+    "name": "admin",
+    "path": "/admin",
+    "component": "/api_profissionais_adm/web/pages/admin.vue",
+    "chunkName": "pages/admin"
+  },
+  {
+    "name": "admin_",
+    "path": "/admin_",
+    "component": "/api_profissionais_adm/web/pages/admin_.vue",
+    "chunkName": "pages/admin_"
+  },
+  {
+    "name": "informacoes",
+    "path": "/informacoes",
+    "component": "/api_profissionais_adm/web/pages/informacoes.vue",
+    "chunkName": "pages/informacoes"
+  },
+  {
+    "name": "inspire",
+    "path": "/inspire",
+    "component": "/api_profissionais_adm/web/pages/inspire.vue",
+    "chunkName": "pages/inspire"
+  },
+  {
+    "name": "login",
+    "path": "/login",
+    "component": "/api_profissionais_adm/web/pages/login.vue",
+    "chunkName": "pages/login"
+  },
+  {
+    "name": "login_admin",
+    "path": "/login_admin",
+    "component": "/api_profissionais_adm/web/pages/login_admin.vue",
+    "chunkName": "pages/login_admin"
+  },
+  {
+    "name": "pedidos",
+    "path": "/pedidos",
+    "component": "/api_profissionais_adm/web/pages/pedidos.vue",
+    "chunkName": "pages/pedidos"
+  },
+  {
+    "name": "pedidosBKP",
+    "path": "/pedidosBKP",
+    "component": "/api_profissionais_adm/web/pages/pedidosBKP.vue",
+    "chunkName": "pages/pedidosBKP"
+  },
+  {
+    "name": "primeiroacesso",
+    "path": "/primeiroacesso",
+    "component": "/api_profissionais_adm/web/pages/primeiroacesso.vue",
+    "chunkName": "pages/primeiroacesso"
+  },
+  {
+    "name": "produtos",
+    "path": "/produtos",
+    "component": "/api_profissionais_adm/web/pages/produtos.vue",
+    "chunkName": "pages/produtos"
+  },
+  {
+    "name": "profissionais",
+    "path": "/profissionais",
+    "component": "/api_profissionais_adm/web/pages/profissionais.vue",
+    "chunkName": "pages/profissionais"
+  },
+  {
+    "name": "resetsenha",
+    "path": "/resetsenha",
+    "component": "/api_profissionais_adm/web/pages/resetsenha.vue",
+    "chunkName": "pages/resetsenha"
+  },
+  {
+    "name": "usuarios",
+    "path": "/usuarios",
+    "component": "/api_profissionais_adm/web/pages/usuarios.vue",
+    "chunkName": "pages/usuarios"
+  },
+  {
+    "name": "vendas",
+    "path": "/vendas",
+    "component": "/api_profissionais_adm/web/pages/vendas.vue",
+    "chunkName": "pages/vendas"
+  },
+  {
+    "name": "vendas_item",
+    "path": "/vendas_item",
+    "component": "/api_profissionais_adm/web/pages/vendas_item.vue",
+    "chunkName": "pages/vendas_item"
+  },
+  {
+    "name": "jmonte-login",
+    "path": "/jmonte/login",
+    "component": "/api_profissionais_adm/web/pages/jmonte/login.vue",
+    "chunkName": "pages/jmonte/login"
+  },
+  {
+    "name": "jmonte-arquivo-home",
+    "path": "/jmonte/arquivo/home",
+    "component": "/api_profissionais_adm/web/pages/jmonte/arquivo/home.vue",
+    "chunkName": "pages/jmonte/arquivo/home"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/api_profissionais_adm/web/pages/index.vue",
+    "chunkName": "pages/index"
+  }
+]

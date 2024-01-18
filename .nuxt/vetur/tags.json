@@ -1,0 +1,44 @@
+{
+  "NuxtLogo": {
+    "description": "Auto imported from components/NuxtLogo.vue"
+  },
+  "Tutorial": {
+    "description": "Auto imported from components/Tutorial.vue"
+  },
+  "VuetifyLogo": {
+    "description": "Auto imported from components/VuetifyLogo.vue"
+  },
+  "Loading": {
+    "description": "Auto imported from components/loading.vue"
+  },
+  "MenuAdmin": {
+    "description": "Auto imported from components/menu/Admin.vue"
+  },
+  "MenuProfissionais": {
+    "description": "Auto imported from components/menu/Profissionais.vue"
+  },
+  "PedidosModalAnexosPedidos": {
+    "description": "Auto imported from components/pedidos/ModalAnexosPedidos.vue"
+  },
+  "PedidosModalFinalizarPedido": {
+    "description": "Auto imported from components/pedidos/ModalFinalizarPedido.vue"
+  },
+  "PedidosModalMotivoRejeicao": {
+    "description": "Auto imported from components/pedidos/ModalMotivoRejeicao.vue"
+  },
+  "UsuariosListaUsuarios": {
+    "description": "Auto imported from components/usuarios/ListaUsuarios.vue"
+  },
+  "ProdutosCadastro": {
+    "description": "Auto imported from components/produtos/Cadastro.vue"
+  },
+  "ProdutosListaCategorias": {
+    "description": "Auto imported from components/produtos/ListaCategorias.vue"
+  },
+  "ProdutosListaProdutos": {
+    "description": "Auto imported from components/produtos/ListaProdutos.vue"
+  },
+  "ProdutosListaTamanhos": {
+    "description": "Auto imported from components/produtos/ListaTamanhos.vue"
+  }
+}

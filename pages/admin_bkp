@@ -1,0 +1,261 @@
+<template lang="">
+  <div></div>
+</template>
+<template class="container">
+  <div class="card_totais">
+    <MenuAdmin v-if="showSistema === true" :usuariologado="nomeUsuario" />
+    <!--v-container grid-list-xs>
+      <v-layout row wrap>
+        <v-card class="pa-1 text-caption text-button text-sm-subtitle-1">
+          Total de pedidos: {{ total_pedidos }}
+        </v-card>
+      </v-layout>
+    </!--v-container-->
+    <!--template>
+      <div class="pl-5 pr-1 pt-2">
+        <v-row>
+          <v-col cols="4">
+            <v-text-field
+              name="valorcliente"
+              label="Cliente..."
+              id="id"
+              class="pr-3"
+              v-model="filtercliente"
+              @keyup="maiusculas()"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </div>
+    </!--template-->
+
+    <template>
+      <v-card>
+        <v-card-title>
+          Total de pedidos: {{ total_pedidos }}
+          <v-spacer></v-spacer>
+          <v-text-field
+            v-model="search"
+            append-icon="mdi-magnify"
+            label="Search"
+            single-line
+            hide-details
+          ></v-text-field>
+        </v-card-title>
+        <template v-slot:default>
+          <v-data-table
+            fixed-header
+            :headers="headers"
+            :items="lpedidos"
+            :search="search"
+            dense
+          ></v-data-table>
+        </template>
+      </v-card>
+    </template>
+
+    <!--template>
+      <div>
+        <v-simple-table dense height="400px" fixed-header class="tabelaPedidos">
+          <template v-slot:default>
+            <thead class="thead_tabela">
+              <tr>
+                <th class="black--text text-right">ID</th>
+                <th class="black--text">DATA</th>
+                <th class="black--text">CLIENTE</th>
+                <th class="black--text">PROFISSIONAL</th>
+                <th class="black--text text-right">PONTOS</th>
+                <th class="black--text">STATUS</th>
+                <th class="black--text"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="listapedidos in filtrarCliente"
+                :key="listapedidos.id_vendas"
+                class=""
+              >
+                <td class="text-caption text-right">
+                  {{ listapedidos.numero_venda }}
+                </td>
+                <td class="text-caption">
+                  {{ listapedidos.data_venda }}
+                </td>
+                <td class="text-uppercase">
+                  {{ listapedidos.nome_cliente }}
+                </td>
+                <td class="text-uppercase">
+                  {{ listapedidos.nome }}
+                </td>
+                <td class="text-uppercase text-right">
+                  {{ listapedidos.total_pontos }}
+                </td>
+                <td class="text-uppercase">
+                  {{ listapedidos.status }}
+                </td>
+                <td>
+                  <v-icon color="red" size="20">delete</v-icon>
+                </td>
+              </tr>
+            </tbody>
+          </template>
+        </v-simple-table>
+      </div>
+    </!--template -->
+    <v-snackbar v-model="snackbar" :timeout="timeout">
+      {{ texto_snackbar }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn color="blue" text v-bind="attrs" @click="snackbar = false">
+          Fechar
+        </v-btn>
+      </template>
+    </v-snackbar>
+  </div>
+</template>
+<script>
+import axios from 'axios'
+export default {
+  data() {
+    return {
+      snackbar: false,
+      texto_snackbar: '',
+      timeout: -1,
+
+      host: process.env.host_api,
+      id_usuario: 0,
+      id_loja: 1,
+      logado: null,
+      nivelUsuario: 999,
+      nomeUsuario: '',
+      showSistema: false,
+      showTabelaPedidos: false,
+
+      total_pedidos: 0,
+      lpedidos: [],
+
+      search: '',
+      filtercliente: '',
+      filtrarprofissional: '',
+      headers: [
+        { text: 'ID', value: 'numero_venda' },
+        { text: 'DATA', value: 'data_venda' },
+        { text: 'CLIENTE', value: 'nome_cliente' },
+        { text: 'PROFISSIONAL', value: 'nome' },
+        { text: 'PONTOS', value: 'total_pontos' },
+        { text: 'STATUS', value: 'status' },
+      ],
+    }
+  },
+  computed: {
+    filtrarCliente() {
+      if (this.filtercliente) {
+        const fil = this.filtercliente.toUpperCase()
+        return this.lpedidos.filter((cli) => {
+          return cli.nome_cliente.toUpperCase().includes(fil)
+        })
+      } else {
+        return this.lpedidos
+      }
+    },
+    filtrarProfissional() {
+      if (this.filtrarprofissional) {
+        const fil = this.filterProduto.toUpperCase()
+        return this.lpedidos.filter((cli) => {
+          return cli.nome.toUpperCase().includes(fil)
+        })
+      } else {
+        return this.lpedidos
+      }
+    },
+  },
+
+  mounted() {
+    this.getLogado()
+    if (this.logado === 'S' && this.nivelUsuario === '1') {
+      this.showSistema = true
+      this.getVendas()
+      // this.getPontosVendas()
+    } else {
+      this.$router.push('/index_admin')
+    }
+  },
+  methods: {
+    showSnackBar(msg, tempo) {
+      this.snackbar = true
+      this.texto_snackbar = msg
+      this.timeout = tempo
+    },
+    getLogado() {
+      this.id_usuario = sessionStorage.getItem('idUsuario')
+      this.logado = sessionStorage.getItem('logado')
+      this.nivelUsuario = sessionStorage.getItem('nivelUsuario')
+      this.nomeUsuario = sessionStorage.getItem('nomeUsuario')
+    },
+    async getVendas() {
+      const pedidos = await axios.get(`${this.host}adm_vendas/${this.id_loja}`)
+      const dados = pedidos.data.pedidos
+      const tam = pedidos.data.quantidade
+      this.total_pedidos = tam
+      console.log('----------dados-----------')
+      console.log(pedidos.data)
+      console.log('Total pedido >>>>>>>>> ' + tam)
+      // if (tam > 1) {
+      for (let i = 0; i < tam; i++) {
+        const dt = this.formataData(dados[i].data_venda)
+        dados[i].data_venda = dt
+
+        const status = dados[i].status
+        if (status === 'P') {
+          dados[i].status = 'PENDENTE'
+        } else if (status === 'R') {
+          dados[i].status = 'REJEITADO'
+        } else if (status === 'A') {
+          dados[i].status = 'APROVADO'
+        } else if (status === 'V') {
+          dados[i].status = 'VENCIDO'
+        }
+        // this.totalPontos_pedidos += dados[i].total_pontos
+        this.showTabelaPedidos = true
+        this.lpedidos = dados
+      }
+    },
+    formataData(data) {
+      const f = data.substring(0, 10)
+      const dt = f.split('-')
+      const ano = dt[0]
+      const mm = dt[1]
+      const dd = dt[2]
+      const dtFinal = dd + '/' + mm + '/' + ano
+
+      return dtFinal
+    },
+    maiusculas() {
+      const valor = this.filtercliente.toUpperCase()
+      this.filtercliente = valor
+    },
+  },
+}
+</script>
+
+<style>
+.totalpedidos {
+  font-size: 12px;
+}
+.card_totais {
+  align-content: flex-start;
+  padding-top: 1px;
+}
+.container {
+  max-width: 100%;
+  padding-left: 10px;
+  padding-top: 100px;
+  align-content: flex;
+}
+.tabelaPedidos {
+  height: 30px;
+  text-orientation: upright;
+}
+.thead_tabela {
+  background-color: silver;
+}
+</style>
